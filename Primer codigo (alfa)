@@ -1,0 +1,26 @@
+//primer paso, control de un foco mediante cambio de estado del boton
+
+int boton = 2;
+int foco = 13;
+
+bool estadoFoco = LOW;
+bool estadoBotonActual;
+bool estadoBotonAnterior = LOW;
+
+void setup() {
+  pinMode(boton, INPUT);
+  pinMode(foco, OUTPUT);
+}
+
+void loop() {
+  estadoBotonActual = digitalRead(boton);
+
+  // Detecta cambio de estado
+  if (estadoBotonActual != estadoBotonAnterior) {
+    estadoFoco = !estadoFoco;        // Cambia estado del foco
+    digitalWrite(foco, estadoFoco);
+    delay(200); // antirrebote simple
+  }
+
+  estadoBotonAnterior = estadoBotonActual;
+}
